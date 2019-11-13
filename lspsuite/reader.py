@@ -332,7 +332,12 @@ def read_volumes(fname):
     
 ################ HIGH LEVEL: Extracting simulation times from headers ################
 def times(fns):
-    """ Get a list of times (in ns), from a list of .p4(.gz) filenames. """
+    """ Get a list of times (in ns), from a list of .p4(.gz) filenames.
+    
+    Example usage:
+    import lspsuite as ls
+    mytimes = ls.times(ls.listp4(".", "flds"))
+    """
     
     nfiles = len(fns)
     times = np.zeros(nfiles)    
@@ -342,10 +347,10 @@ def times(fns):
         
         if ext == '.gz':
             with gzip.open(fn, 'rb') as f:
-                header = rd.get_header(f)
+                header = get_header(f)
         else:
             with open(fn, 'rb') as f:
-                header = rd.get_header(f)
+                header = get_header(f)
         times[i] = header['timestamp']
 
     return times
