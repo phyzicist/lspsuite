@@ -60,7 +60,7 @@ cd lspsuite/
 python setup.py install
 ```
 
-If you installed with the "--user" flag and "~/.local/bin" is not on your system path, add it to your path (e.g. by appending the line "PATH=$PATH:$HOME/.local/bin" to "~/.bashrc"). This will allow you to use any command-line tools from this repository (if any exist yet!).
+If you installed with the "--user" flag and "\~/.local/bin" is not on your system path, add it to your path (e.g. by appending the line "PATH=$PATH:$HOME/.local/bin" to "\~/.bashrc"). This will allow you to use any command-line tools from this repository (if any exist yet!).
 
 ## Usage
 You will need to read through the source code for descriptions of the functions of this package. There is unfortunately no formal documentation.
