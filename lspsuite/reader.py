@@ -57,6 +57,7 @@ def read_flds(fname, flds=None):
         else: # If fields were specified at input, check their validity.
             for fld in flds:
                 if qs.count(fld) < 1:
+                    print("Stored fields in this file are : " + str(qs))
                     raise ValueError("Invalid field request: Field '" + fld + "' is not a stored quantity in this file.")
         #print "All requested fields are available! Reading domains."
         
@@ -104,9 +105,11 @@ def read_flds(fname, flds=None):
 
     return doms, header
 
-def read_sclr(fname, flds=None):
-    """ Simple wrapper for read_flds(), which can also read sclrXXX.p4 files """
-    doms, header = read_flds(fname, flds=flds)
+def read_sclr(fname, sclr=None):
+    """ Simple wrapper for read_flds(), which can also read sclrXXX.p4 files
+        The "sclr" input specifies a list of desired scalar values to pull, and is optional.
+    """
+    doms, header = read_flds(fname, flds=sclr)
     return doms, header
     
 def read_pmovie(fname):
@@ -452,7 +455,7 @@ def get_str(file):
     size=l1;
     if l1%4:
         size+=4-l1%4;
-    return xdr.Unpacker(file.read(size)).unpack_fstring(l1);
+    return xdr.Unpacker(file.read(size)).unpack_fstring(l1).decode('utf-8');
 
 def get_list(file,fmt):
     '''makes a list out of the fmt from the LspOutput f using the format
