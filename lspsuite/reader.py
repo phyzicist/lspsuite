@@ -335,7 +335,7 @@ def read_volumes(fname):
     
 ################ HIGH LEVEL: Extracting simulation times from headers ################
 def times(fns):
-    """ Get a list of times (in ns), from a list of .p4(.gz) filenames.
+    """ Get a list of times (in ns), from a list of flds or sclr .p4(.gz) filenames.
     
     Example usage:
     import lspsuite as ls
@@ -354,7 +354,13 @@ def times(fns):
         else:
             with open(fn, 'rb') as f:
                 header = get_header(f)
-        times[i] = header['timestamp']
+
+        if not (header['dump_type'] == 2 or header['dump_type'] == 3):
+            # this is a fields file or a scalars file.
+            times[i] = header['timestamp']
+        else:
+            raise NotImplementedError('Not implemented for .p4 files other than flds or sclr.');
+
 
     return times
 

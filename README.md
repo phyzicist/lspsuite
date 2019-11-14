@@ -70,7 +70,7 @@ You will need to read through the source code for descriptions of the functions 
 import lspsuite as ls
 
 filenames = ls.listp4(".", prefix="flds")
-timelist = ls.times(filenames)
+timelist = ls.times(filenames) # works only on flds and sclr
 
 domains1, header1 = ls.read_flds("flds41.p4")
 domains2, header2 = ls.read_sclr("sclr41.p4")
